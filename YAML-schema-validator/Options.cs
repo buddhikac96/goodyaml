@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace YAML_schema_validator
 {
-    class Options
+    public class Options
     {
         [Option('y', "yaml", Required = true, HelpText = "YAML file to validate")]
         public string yaml { get; set; }
