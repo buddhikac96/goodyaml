@@ -10,15 +10,15 @@ namespace YAML_schema_validator
 {
     public class YamlFile
     {
-        private string YamlDom;
+        public string YamlDom;
 
-        private readonly string CurrentWorkingDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        private string CurrentWorkingDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
         private string YamlFilePath;
 
         private string YamlFileName;
 
-        public string GetYamlFile(string yamlFileName)
+        public YamlFile(string yamlFileName)
         {
             if (yamlFileName.Contains(".yaml"))
             {
@@ -26,7 +26,7 @@ namespace YAML_schema_validator
                 Console.WriteLine(yamlFileName);
             }
 
-            if(!File.Exists(Path.Combine(CurrentWorkingDirectory, yamlFileName + ".yaml")))
+            if (!File.Exists(Path.Combine(CurrentWorkingDirectory, yamlFileName + ".yaml")))
             {
                 throw new FileNotFoundException("Unable to locate " + yamlFileName + ".yaml in the current directory");
             }
@@ -39,8 +39,6 @@ namespace YAML_schema_validator
             {
                 YamlDom = reader.ReadToEnd();
             }
-
-            return YamlDom;
         }
     }
 }

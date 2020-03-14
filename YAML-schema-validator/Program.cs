@@ -21,8 +21,8 @@ namespace YAML_schema_validator
             Console.WriteLine(opts.yaml);
             Console.WriteLine(opts.json);
 
-            var yamlFile = new YamlFile();
-            var yamlstring = yamlFile.GetYamlFile(opts.yaml);
+            var yamlFile = new YamlFile(opts.yaml);
+            var yamlstring = yamlFile.YamlDom;
             Console.WriteLine(yamlstring);
         }
 
