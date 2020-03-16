@@ -10,13 +10,9 @@ namespace YAML_schema_validator
 {
     public class JsonSchemaFile
     {
-        public string JsonDom;
+        public string JsonDom { get; private set; }
 
-        private string CurrentWorkingDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-
-        private string JsonSchemaFilePath;
-
-        private string JsonSchemaFileName;
+        private readonly string CurrentWorkingDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
         public JsonSchemaFile(string jsonSchemaFileName)
         {
@@ -31,9 +27,9 @@ namespace YAML_schema_validator
                 throw new FileNotFoundException("Unable to locate " + jsonSchemaFileName + ".json in the current directory");
             }
 
-            JsonSchemaFileName = jsonSchemaFileName + ".json";
+            var JsonSchemaFileName = jsonSchemaFileName + ".json";
 
-            JsonSchemaFilePath = Path.Combine(CurrentWorkingDirectory, JsonSchemaFileName);
+            var JsonSchemaFilePath = Path.Combine(CurrentWorkingDirectory, JsonSchemaFileName);
 
             using (var reader = new StreamReader(JsonSchemaFilePath))
             {
