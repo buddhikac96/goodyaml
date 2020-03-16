@@ -24,8 +24,11 @@ namespace YAML_schema_validator
             var jsonFile = new JsonSchemaFile(opts.json);
             var jsonString = jsonFile.JsonDom;
 
-            Console.WriteLine(yamlstring);
-            Console.WriteLine(jsonString);
+            //Console.WriteLine(yamlstring);
+            //Console.WriteLine(jsonString);
+
+            var jsonstringfromyaml = yamlFile.GetJsonFromYaml();
+            Console.WriteLine(jsonstringfromyaml);
         }
 
         static void NotParsed(IEnumerable<Error> erros)

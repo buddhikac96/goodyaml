@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Reflection;
+using YamlDotNet.Serialization;
+using Newtonsoft.Json;
 
 namespace YAML_schema_validator
 {
@@ -39,6 +41,15 @@ namespace YAML_schema_validator
             {
                 YamlDom = reader.ReadToEnd();
             }
+        }
+
+        public string GetJsonFromYaml()
+        {
+            var deserializer = new Deserializer();
+            var yamlObject = deserializer.Deserialize(new StringReader(YamlDom));
+
+            string jsonString = JsonConvert.SerializeObject(yamlObject);
+            return jsonString;
         }
     }
 }
