@@ -27,10 +27,10 @@ namespace YAML_schema_validator
                 JSchema schema = new JSchemaGenerator().Generate(typeof(JsonSchemaType));
 
                 //Read json from file
-                //String jsonString = new JsonSchemaFile(opts.json).JsonDom;
+                var jsonString = new JsonSchemaFile(opts.json).JsonDom;
 
                 //Generating Json schema from json
-                //JsonSchema schema = JsonSchema.Parse(jsonString);
+                //JSchema schema = JSchema.Parse(jsonString);
 
                 //Get Json String from YAML file
                 var jsonstringfromyaml = new YamlFile(opts.yaml).GetJsonFromYaml();
