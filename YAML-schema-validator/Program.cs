@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommandLine;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
+using Newtonsoft.Json.Schema.Generation;
 
 namespace YAML_schema_validator
 {
@@ -18,22 +21,38 @@ namespace YAML_schema_validator
 
         static void Parsed(Options opts)
         {
-            var yamlFile = new YamlFile(opts.yaml);
-            var yamlstring = yamlFile.YamlDom;
+            try
+            {
+                //Generating Json Schema from C# class
+                JSchema schema = new JSchemaGenerator().Generate(typeof(JsonSchemaType));
 
-            var jsonFile = new JsonSchemaFile(opts.json);
-            var jsonString = jsonFile.JsonDom;
+                //Read json from file
+                //String jsonString = new JsonSchemaFile(opts.json).JsonDom;
 
-            //Console.WriteLine(yamlstring);
-            //Console.WriteLine(jsonString);
+                //Generating Json schema from json
+                //JsonSchema schema = JsonSchema.Parse(jsonString);
 
-            var jsonstringfromyaml = yamlFile.GetJsonFromYaml();
-            Console.WriteLine(jsonstringfromyaml);
+                //Get Json String from YAML file
+                var jsonstringfromyaml = new YamlFile(opts.yaml).GetJsonFromYaml();
+
+                //Parsing json string from yaml into JObject
+                JObject student = JObject.Parse(jsonstringfromyaml);
+
+                //validate JObject with schema
+                bool valid = student.IsValid(schema);
+
+                Console.WriteLine(valid);
+            }
+            catch
+            {
+                Console.WriteLine("Error occured during validating");
+            }
+            
         }
 
         static void NotParsed(IEnumerable<Error> erros)
         {
-            Console.WriteLine("Error occured when arg parsing");
+            Console.WriteLine("Error occured during arg parsing");
         }
     }
 }
