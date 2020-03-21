@@ -1,6 +1,6 @@
 # YAML-Schema-Validator
 
-This project provide YAML schema validation using JSON schema.
+This project provide YAML schema validation.
 
 There are two options to provide JSON schema to validate YAML file.
 1. By C# class
