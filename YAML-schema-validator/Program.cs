@@ -15,10 +15,10 @@ namespace YAML_schema_validator
             }
             catch(InvalidDataException)
             {
-                Console.Error.WriteLine("Invalid file paths");
-            }catch(Exception)
+                Console.WriteLine("Invalid file paths");
+            }catch(Exception e)
             {
-                Console.Error.WriteLine("Something is wrong");
+                Console.WriteLine(e);
             }
         }
 
@@ -31,17 +31,18 @@ namespace YAML_schema_validator
 
         static void Parsed(Options opts)
         {
-            try
-            {
+            var readFiles = new ReadFiles(opts.json, opts.yml);
+            var isValid = Validator.YamlValidateJson(readFiles.YAML, readFiles.JSON);
 
-                var readFiles = new ReadFiles(opts.json, opts.yml);
-
-            }
-            catch
+            if (isValid)
             {
-                Console.WriteLine("Error occured during validating");
+                Console.WriteLine("Valid Yaml");
             }
-            
+            else
+            {
+                Console.WriteLine("Invalid Yaml");
+            }
+
         }
 
         static void NotParsed(IEnumerable<Error> erros)

@@ -4,8 +4,8 @@ namespace YAML_schema_validator
 {
     class ReadFiles
     {
-        public readonly string jsonDom;
-        public readonly string ymlDom;
+        public readonly TextReader JSON;
+        public readonly TextReader YAML;
 
         public ReadFiles(string jsonPath, string ymlPath)
         {
@@ -21,15 +21,8 @@ namespace YAML_schema_validator
                 throw new FileNotFoundException("Cannot find " + ymlFile + ".yml at the location " + Path.GetDirectoryName(ymlPath));
             }
 
-            using(var reader = new StreamReader(jsonPath))
-            {
-                jsonDom = reader.ReadToEnd();
-            }
-
-            using(var reader = new StreamReader(ymlPath))
-            {
-                ymlDom = reader.ReadToEnd();
-            }
+            JSON = new StreamReader(jsonPath);
+            YAML = new StreamReader(ymlPath);
         }
     }
 }
