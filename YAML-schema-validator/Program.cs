@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using CommandLine;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
@@ -13,6 +11,21 @@ namespace YAML_schema_validator
     class Program
     {
         static void Main(string[] args)
+        {
+            try
+            {
+                Run(args);
+            }
+            catch(InvalidDataException)
+            {
+                Console.Error.WriteLine("Invalid file paths");
+            }catch(Exception)
+            {
+                Console.Error.WriteLine("Something is wrong");
+            }
+        }
+
+        static void Run(string[] args)
         {
             CommandLine.Parser.Default.ParseArguments<Options>(args)
                 .WithParsed(Parsed)
