@@ -56,12 +56,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JsonSchemaType.cs" />
-    <Compile Include="JsonSchemaFile.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadFiles.cs" />
-    <Compile Include="YamlFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

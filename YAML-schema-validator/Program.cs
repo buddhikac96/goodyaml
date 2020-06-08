@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using CommandLine;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Schema.Generation;
 
 namespace YAML_schema_validator
 {
@@ -36,25 +33,9 @@ namespace YAML_schema_validator
         {
             try
             {
-                //Generating Json Schema from C# class
-                JSchema schema = new JSchemaGenerator().Generate(typeof(JsonSchemaType));
 
-                //Read json from file
-                //var jsonString = new JsonSchemaFile(opts.json).JsonDom;
+                var readFiles = new ReadFiles(opts.json, opts.yml);
 
-                //Generating Json schema from json
-                //JSchema schema = JSchema.Parse(jsonString);
-
-                //Get Json String from YAML file
-                var jsonstringfromyaml = new YamlFile(opts.yaml).GetJsonFromYaml();
-
-                //Parsing json string from yaml into JObject
-                JObject student = JObject.Parse(jsonstringfromyaml);
-
-                //validate JObject with schema
-                bool valid = student.IsValid(schema);
-
-                Console.WriteLine(valid);
             }
             catch
             {
