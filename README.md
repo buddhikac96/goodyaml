@@ -1,4 +1,4 @@
-# YAML-Schema-Validator
+# goodyaml
 
 This project provide YAML schema validation.
 
